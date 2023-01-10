@@ -61,8 +61,8 @@ def log(*args) -> None:
     return functools.partial(print, now, thread, __name__, sep=' | ')(*args)
 
 
-def conf(c=f'{APP}.yaml', key: str = 'nogging') -> Optional[dict]:
-    p = Path(sys.argv[0]).absolute().parent
+def conf(path: str, c=f'{APP}.yaml', key: str = 'nogging') -> Optional[dict]:
+    p = Path(path).absolute()
     while p.parent != p:
         if (p / c).exists():
             log('INFO', f'using config file "{(p / c).as_posix()}"')
@@ -79,8 +79,8 @@ def conf(c=f'{APP}.yaml', key: str = 'nogging') -> Optional[dict]:
 
 
 class Nogging(object):
-    def setup(self) -> None:
-        for k, v in (conf() or {}).items():
+    def setup(self, path: str = '.') -> None:
+        for k, v in (conf(path) or {}).items():
             self._setup_logger(name=k, config=v)
 
     def _setup_logger(self, name: str, config: dict) -> None:

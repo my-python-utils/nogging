@@ -7,7 +7,7 @@ with open('README.md', mode='r', encoding='utf-8') as f:
 
 setup(
     name='nogging',
-    version='1.0.0',
+    version='1.1.0',
     description='Automatically use `nogging.yaml` to manage loggers.',
     long_description=readme,
     long_description_content_type='text/markdown',
